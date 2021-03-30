@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import StreamingHttpResponse
 import pandas as pd
 from CameraApp.camera import VideoCamera
+from .models import Status
 
 # Create your views here.
 
@@ -21,18 +22,19 @@ def video_feed(request):
 def Index(request):
     #######################################################
 
+    ''''' Fetching recent person is known or unknown  '''''
+
+    status = Status.objects.latest('pk')
+    print(status.created_at)
+
+
+
     ''''' fetching recent person '''''
     data = pd.read_csv('E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Id.csv')    
     l = len(data)    
     last_person = data.loc[l-1]    
     name = last_person['name']
     date = last_person['date']
-
-    ''''' Fetching recent person is known or unknown  '''''
-
-
-
-
 
     #######################################################
     return render(request,'CameraApp/index.html', {'name':name, 'date':date})
