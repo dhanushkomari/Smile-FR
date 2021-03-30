@@ -8,7 +8,10 @@
    <meta name="author" content="Smile">
    <meta name="keywords" content="Smile">
    <meta name="theme-color" content="#050505">
+   
    <meta name="description" content="Smile">
+   <meta http-equiv="refresh" content="5">
+
    <!-- stylesheet -->
    <link rel="stylesheet" href="{% static "assets/css/vendors/bootstrap.min.css" %}">
    <link rel="stylesheet" href="{% static "assets/css/vendors/font-awesome.min.css" %}">
@@ -70,19 +73,19 @@
                                <img src="{% static "assets/images/icons/layer.svg" %}" class="icon img-fluid mb-1" alt="icon">                                
                                    
                                    <div class="se_title">                                        
-                                      {% if name %} <h3 class="mb-1">{{name}}</h3>{% endif %} 
+                                      {% if name %} <h3 class="mb-1">Hi, {{name}}</h3>{% endif %} 
                                       {% if date %} <p class="mb-1">You have been identified @ {{date}}</p>{% endif %}                                      
                                    </div>
                                    <p class="mb-5">Here Are your Bookings.</p><br>
                                    <a href="#" id = "btn_click" class="theme_btn_sh3 mr-md-2 mb-md-0 mb-2">With Dr.Nathan @2:30 PM </a> 
-                                                              
+                                          
                            </div>
                        </div>
                    </div>
                </div>
+            </main>    
            </div>
        </div>
-   </main>    
 
    <!-- Scripts -->
    <script src="{% static "assets/js/vendors/jquery-3.3.1.min.js" %}"></script>
@@ -90,17 +93,19 @@
    <script src="{% static "assets/js/vendors/bootstrap.min.js" %}"></script>
    <script src="{% static "assets/js/vendors/parallax.min.js" %}"></script>
    <script src="{% static "assets/js/vendors/slick.min.js" %}"></script>
-   <script src="{% static "assets/js/theme/script.js" %}"></script>   
+   <script src="{% static "assets/js/theme/script.js" %}"></script> 
 
 
-   <script type="text/javascript">
+
+   <!-- <script type="text/javascript">
        var auto_refresh = setInterval(
        function ()
        {
-           console.log('loaded');
-       $('#cont').load(location.href + " #cont").fadeIn("slow");
+           console.log('loaded');           
+           $('#cont').load(location.href + " #cont").fadeIn("slow");
        }, 5000);       
-   </script> 
+   </script>  -->
+
 
 
 </html>
