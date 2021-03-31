@@ -10,7 +10,7 @@
    <meta name="theme-color" content="#050505">
    
    <meta name="description" content="Smile">
-   <meta http-equiv="refresh" content="5">
+   <!-- <meta http-equiv="refresh" content="5"> -->
 
    <!-- stylesheet -->
    <link rel="stylesheet" href="{% static "assets/css/vendors/bootstrap.min.css" %}">
@@ -82,12 +82,7 @@
                                    </div>
                                    <p class="mb-5">Here Are your Bookings.</p><br>
                                    <a href="#" id = "btn_click" class="theme_btn_sh3 mr-md-2 mb-md-0 mb-2">With Dr.Nathan @2:30 PM </a> 
-                                  
-                                   {% ifequal status 'known' %}
-                                   <h1 style="color: aliceblue;">Known detected</h1>
-                                   {% else %}
-                                   <h1 style="color: aliceblue;">unKnown detected</h1>
-                                   {% endifequal %}
+                                                                    
                            </div>
                        </div>
                    </div>
@@ -99,16 +94,15 @@
    <!-- Scripts -->
    
    
-   <script src="{% static "assets/js/vendors/jquery-3.3.1.min.js" %}"></script>
    <script src="{% static "assets/js/vendors/popper.js" %}"></script>
    <script src="{% static "assets/js/vendors/bootstrap.min.js" %}"></script>
+   <script src="{% static "assets/js/vendors/jquery-3.3.1.min.js" %}"></script>
    <script src="{% static "assets/js/vendors/parallax.min.js" %}"></script>
    <script src="{% static "assets/js/vendors/slick.min.js" %}"></script>
    <script src="{% static "assets/js/theme/script.js" %}"></script> 
 
 
-   
-   <!-- <script type="text/javascript">
+   <script type="text/javascript">   
        var auto_refresh = setInterval(
        function ()
        {
@@ -116,13 +110,6 @@
            $('#cont').load(location.href + " #cont").fadeIn("slow");
        }, 5000);       
    </script> 
-    -->
-
-
-
-
-
-
 </html>
 
-</body>
+</body> 

@@ -38,7 +38,7 @@ stat = (
 )
 
 class Patient(models.Model):    
-    id = models.IntegerField(primary_key = True, unique = True, editable = False)
+    # id = models.IntegerField(primary_key = True, unique = True, editable = False)
     first_name = models.CharField(max_length = 30, blank = False)
     last_name = models.CharField(max_length = 30, blank = False)
     age = models.IntegerField()
@@ -49,9 +49,7 @@ class Patient(models.Model):
     email = models.EmailField(max_length = 50, blank = False, help_text = 'abc@example.com')
     city = models.CharField(max_length = 25, null = True)
     created_at = models.DateTimeField(auto_now_add=True)
-    photo = models.ImageField(upload_to='Patient_Users', 
-                              blank = True, 
-                              null = True)
+    # photo = models.ImageField(upload_to='Patient_Users',blank = True, null = True)
         
     # patient_bookings = models.name = models.ForeignKey('Booking',on_delete=models.CASCADE)
 

@@ -2,7 +2,12 @@ from django.shortcuts import render,redirect
 from django.http import StreamingHttpResponse, HttpResponse
 import pandas as pd
 from CameraApp.camera import VideoCamera
-from .models import Status
+from .models import Status, Patient
+from .forms import PatientForm
+
+from rest_framework.decorators import api_view
+from .serializers import PatientSerializer, StatusSerializer
+from rest_framework.response import Response
 
 # Create your views here.
 
@@ -29,21 +34,61 @@ def Index(request):
         print('An unknown detected')     
         return redirect('CameraApp:create')
 
-    elif status.lower() == 'known':
-        
+    elif status.lower() == 'known':        
         ###### fetching recent person ######
         data = pd.read_csv('E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Id.csv')   
         # print(data) 
         l = len(data)    
         last_person = data.loc[l-1]  
         name = last_person['name']   
-        date = last_person['date']   
+        date = last_person['date'] 
+        return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status})  
     else:
         return HttpResponse('Page Not Found')    
-    return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status})
+    
     ##############################################################################################
 
 
 
 def UserCreateView(request):
-    return render(request, 'CameraApp/create.html')
+
+    if request.method == 'POST':
+        form  = PatientForm(request.POST)
+        if form.is_valid():
+            
+            pat = Patient.objects.create(first_name = request.POST['first_name'],
+                                        last_name = request.POST['last_name'],
+                                        age = request.POST['age'],
+                                        blood_group = request.POST['blood_group'],
+                                        gender = request.POST['gender'],
+                                        status = request.POST['status'],
+                                        contact = request.POST['contact'],
+                                        email = request.POST['email'],
+                                        city = request.POST['city']
+                                        )
+            pat.save()
+            # except:
+            #     return HttpResponse('No user created/ form is invalid')
+
+            return redirect('CameraApp:index')
+    else:
+        form = PatientForm()
+    return render(request, 'CameraApp/create.html', {'form':form})
+
+
+#############################################################################################
+###################################  API VIEWS   ############################################
+#############################################################################################
+
+
+@api_view(['GET'])
+def recentPatient(request):
+    pat = Patient.objects.latest('pk')
+    serializer = PatientSerializer(pat, many = False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def StatusRest(request):
+    stat = Status.objects.all().order_by('-id')
+    serializer = StatusSerializer(stat, many = True)
+    return Response(serializer.data)
