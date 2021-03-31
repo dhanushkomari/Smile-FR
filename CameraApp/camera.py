@@ -8,7 +8,7 @@ from django.conf import settings
 class VideoCamera(object):
 	def __init__(self):
 		# self.video = cv2.VideoCapture('rtsp://192.168.137.137:8080/h264_ulaw.sdp')
-		self.video = cv2.VideoCapture(0)
+		self.video = cv2.VideoCapture(1)
 			
 
 	def __del__(self):
@@ -32,7 +32,5 @@ class VideoCamera(object):
 		return [self.name, self.college]
 
 	def FrCode(self):
-		sucess, image = self.video.read()
-
-    
+		sucess, image = self.video.read() 
 	
