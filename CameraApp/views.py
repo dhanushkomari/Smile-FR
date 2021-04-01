@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import StreamingHttpResponse, HttpResponse
 import pandas as pd
+from datetime import datetime
 from CameraApp.camera import VideoCamera
 from .models import Status, Patient
 from .forms import PatientForm
@@ -8,6 +9,7 @@ from .forms import PatientForm
 from rest_framework.decorators import api_view
 from .serializers import PatientSerializer, StatusSerializer
 from rest_framework.response import Response
+
 
 # Create your views here.
 
@@ -46,7 +48,19 @@ def Index(request):
         last_person = data.loc[l-1]  
         name = last_person['name']   
         date = last_person['date']
-        
+
+        now = datetime.now()
+        recent_date = datetime.strptime(date, '%d-%m-%Y %H:%M:%S')
+        diff = (now-recent_date).seconds
+        print(diff)
+
+        if diff<=10:
+            print('person detected recently')
+        else:
+            print('person detected long time ago')
+            
+
+                
         return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status})  
     else:
         return HttpResponse('Page Not Found') 

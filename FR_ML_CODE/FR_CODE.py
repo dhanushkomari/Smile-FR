@@ -250,16 +250,11 @@ def main():
             break                                                
 
     cv2.destroyAllWindows()
-
     cap.release()
 if __name__ == "__main__":
+
     main()
-
-
-# In[]
-
-
-    
+  
     
     
     
