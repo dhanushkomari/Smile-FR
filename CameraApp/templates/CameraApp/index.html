@@ -64,7 +64,7 @@
                                alt="No image found"
                                width="85%" 
                                class="icon-vid img-fluid mb-3" 
-                               onerror="this.src='{% static '12.jpg' %}'; ">
+                               onerror="this.src='{% static '19.gif' %}'; ">
 
                        </div>
                        <!-- col -->
@@ -76,14 +76,24 @@
                                                               
                                    
                                    <div class="se_title">
-                                       <h4 class="mb-1">Welcome to smiles</h4>                                        
-                                      {% if name %} <h3 class="mb-1">Hi, {{name}}{% else %} Welcome to Smiles.</h3>{% endif %} 
-                                      {% if date %} <p class="mb-1">You have been identified @ {{date}}</p>{% endif %} 
-                                      {% if status %} <p class="mb-1">{{status}}</p>{% endif %}                                    
+                                       <!--                                         -->
+                                      {% if name %} <h3 class="mb-1">Hi, {{name}}</h3>
+                                        </a>{% endif %} 
+                                      {% if date %} <p class="mb-1">You have been identified @ {{date}}<br>
+                                      Here Are your Bookings. </p>
+                                      <a href="#" id = "btn_click" class="btn btn-md btn-warning">With Dr.Nathan @2:30 PM </a> {% endif %}
                                    </div>
-                                   <p class="mb-5">Here Are your Bookings.</p><br>
-                                   <a href="#" id = "btn_click" class="theme_btn_sh3 mr-md-2 mb-md-0 mb-2">With Dr.Nathan @2:30 PM </a> 
-                                                                
+                                    
+                                   {% ifequal status 'unknown' %}
+                                   <div class="se_title">
+                                            <h2 class="mb-1" style="color: aliceblue;">Welcome to smiles</h2> 
+                                            <p class="mb-1" style="color: aliceblue;"> You Are not in our User List</h3><br><br>
+                                            <!-- <p class="mb-1">Click below, get your own access</p> -->
+                                            <a href="{% url 'CameraApp:create' %}" id = "btn_click" class="btn btn-md btn-warning">Create your own Account</a>
+                                    </div>
+                                   {% endifequal %} 
+                                   
+                                   
                            </div>
                        </div>
                    </div>
@@ -107,31 +117,17 @@
 
    
    <script type="text/javascript"> 
-    function pageload(){
-       console.log('function executed')
-
-    
-       var s = `{{status}}`;
-       console.log(s)
-       if(s === 'known'){
+   
+       
+       
             var auto_refresh = setInterval(
             function ()
-            {
-                const temp = '{{date}}'
-                console.log('new status', temp)
-                console.log('loaded'); 
-                console.log('known found') 
-                console.log('{{status}}')         
+            {               
+                console.log('loaded');                     
                 $('#cont').load(location.href + " #cont").fadeIn("slow");
             }, 5000); 
-        } 
-        else{
-            window.location.href = 'http://127.0.0.1:8000/create'
-            console.log('unknow found')
-        }  
+    
         
-    }
-    pageload();
    </script> 
 </html>
 

@@ -8,7 +8,7 @@ class Status(models.Model):
     class Meta:
         verbose_name = 'Status'
         verbose_name_plural = 'Status'
-        ordering = ('created_at',)
+        ordering = ('-created_at',)
 
     def __str__(self):
         return '{}'.format(self.status)
@@ -56,7 +56,7 @@ class Patient(models.Model):
     class Meta:
         verbose_name = 'Patient'
         verbose_name_plural = 'Patients'
-        ordering = ('id',)
+        ordering = ('-id',)
 
     # def get_url():
         # return reverse('')
