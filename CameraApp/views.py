@@ -41,11 +41,12 @@ def Index(request):
         l = len(data)    
         last_person = data.loc[l-1]  
         name = last_person['name']   
-        date = last_person['date'] 
+        date = last_person['date']
+        
         return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status})  
     else:
-        return HttpResponse('Page Not Found')    
-    
+        return HttpResponse('Page Not Found') 
+        
     ##############################################################################################
 
 
@@ -67,8 +68,12 @@ def UserCreateView(request):
                                         city = request.POST['city']
                                         )
             pat.save()
-            # except:
-            #     return HttpResponse('No user created/ form is invalid')
+            st = Status.objects.latest('pk')
+            if st.status == 'unknown':                
+                st.delete()
+                print('recent unkown feeded')
+            else:
+                print('recent is known') 
 
             return redirect('CameraApp:index')
     else:

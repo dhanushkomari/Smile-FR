@@ -30,13 +30,11 @@
       border-radius: 2%;
   }
    </style>
-
-
-
+   
 
 </head>
 
-<body data-spy="scroll" data-target="#scrollspy_bar" data-offset="0">
+<body data-spy="scroll" data-target="#scrollspy_bar" data-offset="0" onload="functionToBeExecuted">
    <!-- LODAER -->
    <div class="loader_screen" id="loader_screen">
        <div class="loader">
@@ -78,7 +76,8 @@
                                    
                                    <div class="se_title">                                        
                                       {% if name %} <h3 class="mb-1">Hi, {{name}}{% else %} Welcome to Smiles.</h3>{% endif %} 
-                                      {% if date %} <p class="mb-1">You have been identified @ {{date}}</p>{% endif %}                                      
+                                      {% if date %} <p class="mb-1">You have been identified @ {{date}}</p>{% endif %} 
+                                      {% if status %} <p class="mb-1">{{status}}</p>{% endif %}                                    
                                    </div>
                                    <p class="mb-5">Here Are your Bookings.</p><br>
                                    <a href="#" id = "btn_click" class="theme_btn_sh3 mr-md-2 mb-md-0 mb-2">With Dr.Nathan @2:30 PM </a> 
@@ -102,13 +101,31 @@
    <script src="{% static "assets/js/theme/script.js" %}"></script> 
 
 
-   <script type="text/javascript">   
-       var auto_refresh = setInterval(
-       function ()
-       {
-           console.log('loaded');           
-           $('#cont').load(location.href + " #cont").fadeIn("slow");
-       }, 5000);       
+   
+   <script type="text/javascript"> 
+    function pageload(){
+       console.log('function executed')
+
+    
+       var s = `{{status}}`;
+       console.log(s)
+       if(s === 'known'){
+            var auto_refresh = setInterval(
+            function ()
+            {
+                console.log('loaded'); 
+                console.log('known found') 
+                console.log('{{status}}')         
+                $('#cont').load(location.href + " #cont").fadeIn("slow");
+            }, 5000); 
+        } 
+        else{
+            window.location.href = 'http://127.0.0.1:8000/create'
+            console.log('unknow found')
+        }  
+        
+    }
+    pageload();
    </script> 
 </html>
 
