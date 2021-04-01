@@ -8,6 +8,8 @@ urlpatterns = [
     path('create', views.UserCreateView, name = 'create'),
     path('video_feed', views.video_feed, name = 'video_feed'),
 
-    path('api/patients', views.recentPatient, name = 'recent-patient'),
-    path('api/status', views.StatusRest, name = 'status')
+    ##############   API URLS   ##############
+    path('api/patients', views.recentPatient, name = 'recent_patient'),
+    path('api/status', views.StatusRest, name = 'status'),
+    path('api/all-patients', views.allPatients, name = 'all_patients')
 ]

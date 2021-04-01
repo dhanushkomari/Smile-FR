@@ -98,3 +98,9 @@ def StatusRest(request):
     stat = Status.objects.all().order_by('-id')
     serializer = StatusSerializer(stat, many = True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def allPatients(request):
+    pats = Patient.objects.all().order_by('-id')
+    serializer = PatientSerializer(pats, many = True)
+    return Response(serializer.data)
