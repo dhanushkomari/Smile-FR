@@ -132,7 +132,7 @@ def main():
                                     pickle.dump(data, output)
                                     output.close()
                             module = "E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/encoding_append.pickle" # were u want to store the pickle file
-                                    output = open(module, "wb")
+                            output = open(module, "wb")
                             module = pickle.loads(open(module, "rb").read())
                             
                             module1 = "E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Images/encoding1.pickle" # were u want to store the pickle file

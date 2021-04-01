@@ -72,21 +72,25 @@
                            <!-- box -->
                            <div class="box">
                                <!-- icon -->
-                               <img src="{% static "assets/images/icons/layer.svg" %}" class="icon img-fluid mb-1" alt="icon">                                
+                               <img src="{% static "assets/images/icons/layer.svg" %}" class="icon img-fluid mb-1" alt="icon"> 
+                                                              
                                    
-                                   <div class="se_title">                                        
+                                   <div class="se_title">
+                                       <h4 class="mb-1">Welcome to smiles</h4>                                        
                                       {% if name %} <h3 class="mb-1">Hi, {{name}}{% else %} Welcome to Smiles.</h3>{% endif %} 
                                       {% if date %} <p class="mb-1">You have been identified @ {{date}}</p>{% endif %} 
                                       {% if status %} <p class="mb-1">{{status}}</p>{% endif %}                                    
                                    </div>
                                    <p class="mb-5">Here Are your Bookings.</p><br>
                                    <a href="#" id = "btn_click" class="theme_btn_sh3 mr-md-2 mb-md-0 mb-2">With Dr.Nathan @2:30 PM </a> 
-                                                                    
+                                                                
                            </div>
                        </div>
                    </div>
                </div>
+               
             </main>    
+
            </div>
        </div>
 
@@ -113,6 +117,8 @@
             var auto_refresh = setInterval(
             function ()
             {
+                const temp = '{{date}}'
+                console.log('new status', temp)
                 console.log('loaded'); 
                 console.log('known found') 
                 console.log('{{status}}')         

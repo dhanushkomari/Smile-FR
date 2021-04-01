@@ -32,7 +32,7 @@ def Index(request):
 
     if status.lower() == 'unknown':   
         print('An unknown detected')     
-        return redirect('CameraApp:create')
+        # return redirect('CameraApp:create')
 
     elif status.lower() == 'known':        
         ###### fetching recent person ######
@@ -46,6 +46,7 @@ def Index(request):
         return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status})  
     else:
         return HttpResponse('Page Not Found') 
+    return render(request,'CameraApp/index.html', {'status':status})
         
     ##############################################################################################
 
