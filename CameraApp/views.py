@@ -58,7 +58,7 @@ def Index(request):
             print('person detected recently')
         else:
             print('person detected long time ago')
-            
+              
 
                 
         return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status})  
