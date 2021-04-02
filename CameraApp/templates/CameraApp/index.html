@@ -74,23 +74,43 @@
                                <!-- icon -->
                                <img src="{% static "assets/images/icons/layer.svg" %}" class="icon img-fluid mb-1" alt="icon"> 
                                                               
-                                   
+                                   {% ifequal status 'known' %}
                                    <div class="se_title">
-                                       <!--                                         -->
-                                      {% if name %} <h3 class="mb-1">Hi, {{name}}</h3>
-                                        </a>{% endif %} 
-                                      {% if date %} <p class="mb-1">You have been identified @ {{date}}<br>
-                                      Here Are your Bookings. </p>
-                                      <a href="#" id = "btn_click" class="btn btn-md btn-warning">With Dr.Nathan @2:30 PM </a> {% endif %}
-                                   </div>
+                                      {% ifequal person 'recent' %}
+                                            {% if name %} <h3 class="mb-1">Hi, {{name}}</h3></a>{% endif %} 
+                                            {% if date %} <p class="mb-1">You have been identified @ {{date}}<br>
+                                            Here Are your Bookings. </p>
+                                            <a href="#" id = "btn_click" class="btn btn-md btn-warning">With Dr.Nathan @2:30 PM </a> {% endif %}
+                                            </div>
+                                        {% else %}
+                                            <div class="se_title">
+                                                <h2 class="mb-1" style="color: aliceblue;">Welcome to Smiles</h2>
+                                            </div>
+                                            
+                                        {% endifequal %}
+
+
+                                   {% endifequal %}
                                     
                                    {% ifequal status 'unknown' %}
-                                   <div class="se_title">
-                                            <h2 class="mb-1" style="color: aliceblue;">Welcome to smiles</h2> 
-                                            <p class="mb-1" style="color: aliceblue;"> You Are not in our User List</h3><br><br>
-                                            <!-- <p class="mb-1">Click below, get your own access</p> -->
-                                            <a href="{% url 'CameraApp:create' %}" id = "btn_click" class="btn btn-md btn-warning">Create your own Account</a>
-                                    </div>
+                                    
+                                    {% ifequal stat 'new' %}
+
+                                        <div class="se_title">
+                                                    <h2 class="mb-1" style="color: aliceblue;">Welcome to Smiles</h2> 
+                                                    <p class="mb-1" style="color: aliceblue;"> You Are not in our User List</h3><br><br>
+                                                    <!-- <p class="mb-1">Click below, get your own access</p> -->
+                                                    <a href="{% url 'CameraApp:create' %}" id = "btn_click" class="btn btn-md btn-warning">Create your own Account</a>
+                                            </div>
+                                    {% else %}
+                                        <div class="se_title">
+                                            <h2 class="mb-1" style="color: aliceblue;">Welcome to Smiles</h2> 
+                                            
+                                        </div>
+                                            
+                                    
+                                    {% endifequal %}
+
                                    {% endifequal %} 
                                    
                                    

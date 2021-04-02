@@ -10,6 +10,8 @@ from rest_framework.decorators import api_view
 from .serializers import PatientSerializer, StatusSerializer
 from rest_framework.response import Response
 
+import pytz
+tz = pytz.timezone('Asia/Kolkata')
 
 # Create your views here.
 
@@ -32,16 +34,35 @@ def video_feed(request):
 
 def Index(request):    
     name = '' 
+    person = ''
+    stat = ''
     ##########################   Fetching recent person is known or unknown  #####################
     s_obj = Status.objects.latest('pk')
     status = s_obj.status
 
+    #################################   FOR UNKNOWN USERS     ####################################
     if status.lower() == 'unknown':   
-        print('An unknown detected')     
-        # return redirect('CameraApp:create')
+        print('An unknown detected') 
 
+        obj_time = s_obj.created_at        
+        time2 = obj_time.astimezone(tz)       
+        time3 = time2.replace(tzinfo = None)
+        now = datetime.now()   
+
+        dif = (now-time3).seconds
+        print(dif)
+
+        if dif<=30:
+            print('new Unknown Person Identified')
+            stat = 'new'
+        else:
+            print('unknown person identified long time ago')
+            stat = 'old'
+        
+
+        
+    ################################    FRO KNOWN PERSONS     #####################################
     elif status.lower() == 'known':        
-        #####################     fetching recent person  #####################
         data = pd.read_csv('E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Id.csv')   
         # print(data) 
         l = len(data)    
@@ -54,17 +75,20 @@ def Index(request):
         diff = (now-recent_date).seconds
         print(diff)
 
-        if diff<=10:
+        if diff<=25:
             print('person detected recently')
+            person = 'recent'
         else:
             print('person detected long time ago')
+            person = 'ago'
+
               
 
                 
-        return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status})  
+        return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status, 'person': person})  
     else:
         return HttpResponse('Page Not Found') 
-    return render(request,'CameraApp/index.html', {'status':status})
+    return render(request,'CameraApp/index.html', {'status':status, 'stat':stat})
 
 
         
