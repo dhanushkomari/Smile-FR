@@ -131,6 +131,18 @@ def UserCreateView(request):
 #############################################################################################################
 
 @api_view(['GET'])
+def apiView(request):
+    api_urls = {
+        'recent-patient' : '/api/patients',
+        'recent-status'  : '/api/status-recent',
+        'all-patients'   : '/api/all-patients',
+        'all-status'     : '/api/status',
+        'create-patient' : '/api/create-patient',
+        'create-status'  : '/api/create-status',
+    }
+    return Response(api_urls)
+
+@api_view(['GET'])
 def recentPatient(request):
     pat = Patient.objects.latest('pk')
     serializer = PatientSerializer(pat, many = False)

@@ -10,6 +10,7 @@ urlpatterns = [
     path('video_feed', views.video_feed, name = 'video_feed'),
 
     ########################   API URLS   ############################
+    path('api', views.apiView, name = 'api'),
     path('api/patients', views.recentPatient, name = 'recent_patient'),
     path('api/status-recent', views.recentStatus, name = 'receent_status'),
     path('api/status', views.StatusRest, name = 'status'),
