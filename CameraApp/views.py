@@ -69,10 +69,10 @@ def Index(request):
         last_person = data.loc[l-1]  
         name = last_person['name']   
         date = last_person['date']
-
         now = datetime.now()
         recent_date = datetime.strptime(date, '%d-%m-%Y %H:%M:%S')
         diff = (now-recent_date).seconds
+
         print(diff)
 
         if diff<=25:
@@ -137,6 +137,12 @@ def recentPatient(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
+def recentStatus(request):
+    stat = Status.objects.latest('pk')
+    serializer = StatusSerializer(stat, many = False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
 def StatusRest(request):
     stat = Status.objects.all().order_by('-id')
     serializer = StatusSerializer(stat, many = True)
@@ -155,9 +161,16 @@ def createStatus(request):
         serializer.save()
     return Response(serializer.data)
 
+
 @api_view(['POST'])
 def createPatient(request):
     serializer = PatientSerializer(request.data)
     if serializer.is_valid():
         serializer.save()
     return  Response(serializer.data)
+
+
+###########################################################################################
+#############################    ACCOUNTS VIEWS   #########################################
+###########################################################################################
+

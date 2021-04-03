@@ -11,6 +11,7 @@ urlpatterns = [
 
     ########################   API URLS   ############################
     path('api/patients', views.recentPatient, name = 'recent_patient'),
+    path('api/status-recent', views.recentStatus, name = 'receent_status'),
     path('api/status', views.StatusRest, name = 'status'),
     path('api/all-patients', views.allPatients, name = 'all_patients'),
     path('api/create-status', views.createStatus, name = 'create_status'),
