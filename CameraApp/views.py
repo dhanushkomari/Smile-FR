@@ -58,9 +58,7 @@ def Index(request):
         else:
             print('unknown person identified long time ago')
             stat = 'old'
-        
 
-        
     ################################    FRO KNOWN PERSONS     #####################################
     elif status.lower() == 'known':        
         data = pd.read_csv('E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Id.csv')   
@@ -81,12 +79,11 @@ def Index(request):
         else:
             print('person detected long time ago')
             person = 'ago'
-                            
+
         return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status, 'person': person})  
     else:
         return HttpResponse('Page Not Found') 
     return render(request,'CameraApp/index.html', {'status':status, 'stat':stat})
-
 
         
 #################################################################################################################
@@ -94,7 +91,6 @@ def Index(request):
 #################################################################################################################
 
 def UserCreateView(request):
-
     if request.method == 'POST':
         form  = PatientForm(request.POST)
         if form.is_valid():
@@ -121,7 +117,6 @@ def UserCreateView(request):
     else:
         form = PatientForm()
     return render(request, 'CameraApp/create.html', {'form':form})
-
 
 #############################################################################################################
 ##########################################  API VIEWS   #####################################################
@@ -177,7 +172,6 @@ def createPatient(request):
     if serializer.is_valid():
         serializer.save()
     return  Response(serializer.data)
-
 
 ###########################################################################################
 #############################    ACCOUNTS VIEWS   #########################################
