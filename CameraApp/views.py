@@ -81,10 +81,7 @@ def Index(request):
         else:
             print('person detected long time ago')
             person = 'ago'
-
-              
-
-                
+                            
         return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status, 'person': person})  
     else:
         return HttpResponse('Page Not Found') 
