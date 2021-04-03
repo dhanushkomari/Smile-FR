@@ -1,16 +1,18 @@
 from django.shortcuts import render,redirect
 from django.http import StreamingHttpResponse, HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 import pandas as pd
 from datetime import datetime
 from CameraApp.camera import VideoCamera
 from .models import Status, Patient
 from .forms import PatientForm
-
 from rest_framework.decorators import api_view
 from .serializers import PatientSerializer, StatusSerializer
 from rest_framework.response import Response
-
 import pytz
+
 tz = pytz.timezone('Asia/Kolkata')
 
 # Create your views here.
@@ -177,3 +179,26 @@ def createPatient(request):
 #############################    ACCOUNTS VIEWS   #########################################
 ###########################################################################################
 
+def LoginView(request):
+    '''
+    if request.method ==  'POST':
+        form = AuthenticationForm(data = request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username = username, password = password)
+            if user is not None:
+                request.setexpiry(86400)
+                login(request, user)
+                return redirect('CameraApp:index')
+            else:
+                return HttpResponse('Invalid Credentails')
+    return render(request, 'CameraApp/login.html', {'form':form})
+    '''
+    return HttpResponse('Login View - Note: remove this line when template added')
+
+    
+@login_required
+def LogoutView(request):
+    logout(request)
+    return HttpResponse('logot successfully')

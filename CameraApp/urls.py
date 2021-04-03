@@ -9,6 +9,10 @@ urlpatterns = [
     path('create', views.UserCreateView, name = 'create'),
     path('video_feed', views.video_feed, name = 'video_feed'),
 
+    ########################  APP AUTHENTICATION  ####################
+    path('login', views.LoginView, name = 'login'),
+    path('logout', views.LogoutView, name = 'logout'),
+
     ########################   API URLS   ############################
     path('api', views.apiView, name = 'api'),
     path('api/patients', views.recentPatient, name = 'recent_patient'),
