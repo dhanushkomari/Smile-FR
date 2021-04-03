@@ -15,16 +15,15 @@ import time
 import shutil
 import datetime
 import pandas as pd
-
 import warnings    
-import psycopg2
-conn = psycopg2.connect(host = 'localhost',database = 'FR-SMILE-DB',user = 'postgres',password = 'admin123',port = 5432)
 
     
 warnings.filterwarnings("ignore")
- 
 #import sqlite3
 
+
+import psycopg2
+conn = psycopg2.connect(host = 'localhost',database = 'FR-SMILE-DB',user = 'postgres',password = 'admin123',port = 5432)
 
 def get_sec(time_str):
     """Get Seconds from time."""
@@ -87,19 +86,10 @@ def main():
                         df_u=df_u.iloc[-10:,:]
                         t_diff=(df_u.iloc[9,1]-df_u.iloc[0,1])
                         if t_diff<=20:
-                            currenttime1 = datetime.datetime.now() 
-                            c_time = str(currenttime1)
-                            
-                            cursor = conn.cursor()
-                            
-                            stat = 'unknown'
-                            d = datetime.datetime.now()
-                            cursor.execute("ROLLBACK")
-                            query = '''INSERT INTO "CameraApp_status"(status, created_at) VALUES (%s, %s)'''
-                            cursor.execute((query), (stat,d))
-                            
+                            current_time = datetime.datetime.now() 
+                            cur = conn.cursor()
+                            cur.execute('''INSERT INTO "CameraApp_status"(status, created_at)  VALUES ('unknown', current_time);''')
                             conn.commit()
-                            print('DB Updated with known')
                             print(t_diff)
                             print('unkonwn patient detected please fill your data')     
                             print('please fill your data')
@@ -144,7 +134,6 @@ def main():
                                     knownNames.append(name)
                                     print("[INFO] serializing encodings...")
                                     data = {"encodings": knownEncodings, "names": knownNames}
-                                    output = open(module, "wb")
                                     pickle.dump(data, output)
                                     output.close()
                             module = "E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/encoding_append.pickle" # were u want to store the pickle file
@@ -203,10 +192,12 @@ def main():
 
             
             df1['name']=[name]
+  
+            import datetime
             now =(datetime.datetime.now())
-            
+            print(now)
+       
             dt = now.strftime("%d-%m-%Y %H:%M:%S")
-
 
             df1['date']=[dt]
             
@@ -232,9 +223,15 @@ def main():
 
                         
                 else:
+                  
                     l=len(df)
                     ld=df.iloc[l-1,1]
-                    x =(datetime.datetime.now())
+                    print(ld)
+                
+                    
+                    x = datetime.datetime.now()
+                    print(x)
+                   
                     date_time_obj=datetime.datetime.strptime(ld, '%d-%m-%Y %H:%M:%S')
                     z=str(x-date_time_obj)
                     print(z)
@@ -247,38 +244,19 @@ def main():
                     try:
                         k=get_sec(z)
                         if k>60:
+                            current_time = datetime.datetime.now() 
                             df=df.append(df1, ignore_index = True)
-                            currenttime1 = datetime.datetime.now() 
-                            c_time = str(currenttime1)
-                            c_time = str(currenttime1)
+                             
                             df.to_csv("E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Id.csv")
-                            pushing=df.iloc[-1,0]
-                            cursor = conn.cursor()
-                            
-                            stat = 'known'
-                            d = datetime.datetime.now()
-                            cursor.execute("ROLLBACK")
-                            query = '''INSERT INTO "CameraApp_status"(status, created_at) VALUES (%s, %s)'''
-                            cursor.execute((query), (stat,d))
-                            
-                            
-                            print('DB updated with known')
-
+                            cur = conn.cursor()
+                            cur.execute('''INSERT INTO "CameraApp_status"(status, created_at)  VALUES ('unknown', current_time);''')
                     except ValueError:
                         df=df.append(df1, ignore_index = True)
-                        currenttime1 = datetime.datetime.now()
-                        c_time = str(currenttime1)
+                        current_time = datetime.datetime.now() 
                         df.to_csv("E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Id.csv")
                         pushing=df.iloc[-1,0]
-                        cursor = conn.cursor()
-                        
-                        stat = 'known'
-                        d = datetime.datetime.now()
-                        cursor.execute("ROLLBACK")
-                        query = '''INSERT INTO "CameraApp_status"(status, created_at) VALUES (%s, %s)'''
-                        cursor.execute((query), (stat,d))
-                        
-                        print('DB updated with known')
+                        cur = conn.cursor()
+                        cur.execute('''INSERT INTO "CameraApp_status"(status, created_at)  VALUES (pushing, current_time);''')
 
             now =(datetime.datetime.now())
             
@@ -292,10 +270,10 @@ def main():
 
     cv2.destroyAllWindows()
     cap.release()
-    
-    
 if __name__ == "__main__":
+
     main()
   
+# In[]
 
-    
+

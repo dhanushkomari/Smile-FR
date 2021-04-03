@@ -147,3 +147,17 @@ def allPatients(request):
     pats = Patient.objects.all().order_by('-id')
     serializer = PatientSerializer(pats, many = True)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def createStatus(request):
+    serializer = StatusSerializer(data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def createPatient(request):
+    serializer = PatientSerializer(request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return  Response(serializer.data)

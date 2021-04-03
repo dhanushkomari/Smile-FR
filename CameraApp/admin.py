@@ -3,6 +3,8 @@ from .models import Status, Patient
 
 # Register your models here.
 
+admin.site.site_header = 'Hyderabad Smiles'
+
 class StatusAdmin(admin.ModelAdmin):
     list_display = ['id', 'status', 'created_at']
     list_per_page = 20
