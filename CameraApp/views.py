@@ -128,8 +128,8 @@ def UserCreateView(request):
 def apiView(request):
     api_urls = {
         'recent-patient' : '/api/patients',
-        'recent-status'  : '/api/status-recent',
         'all-patients'   : '/api/all-patients',
+        'recent-status'  : '/api/status-recent',
         'all-status'     : '/api/status',
         'create-patient' : '/api/create-patient',
         'create-status'  : '/api/create-status',

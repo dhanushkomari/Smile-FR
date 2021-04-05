@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Apr  3 17:39:18 2021
+
+@author: Dhanush.komari
+"""
+
 import sys
 print(sys.path)
 try:
@@ -55,10 +62,8 @@ def main():
     global df_u
     df_u = pd.DataFrame(columns = ['Name','time']) 
     print(df_u)
-
-    encoding = "E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/encoding_append.pickle"
     
-    encoding = "E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/encoding_append.pickle"
+    encoding = "C:/Users/Dhanush.Komari/Downloads/FR_Backup/Images/encoding_append.pickle"
     data = pickle.loads(open(encoding, "rb").read())
 
     #cap = cv2.VideoCapture("rtsp://192.168.43.1:8080/h264_ulaw.sdp")
@@ -133,36 +138,40 @@ def main():
                                 id=x['first_name']+str(x['id'])
                                 if q<=80:
                                     count =1
-                                    shutil.rmtree('E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Images/user1')
+                                    try:
+                                        shutil.rmtree('C:/Users/Dhanush.Komari/Downloads/FR_Backup/Images/user1')
+                                    except Exception:
+                                        pass
                                     print('object found, user has been entered the data through app')
                                     break
                                 if (t_end-t_start)>80:
                                     count=0
                                     print('I am unnecessarily being terminated')
                                     break
+
                                     
                 if (count>=1):
                     count=0
                     mode = 0o666
                     r_t_diff=20
-                    
-                    
-                    
-
                     user_folder=id
-                    path = os.path.join('E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Images/','user1') 
-                    os.mkdir(path, mode) 
+                    #user_folder=input()
+                    path = os.path.join('C:/Users/Dhanush.Komari/Downloads/FR_Backup/Images/','user1') 
+                    try:
+                        os.mkdir(path, mode) 
+                    except Exception:
+                        pass
                     count_i=0
                     cv2.imshow("Frame", frame)
                     while True:
                         print('training the model')
-                        cv2.imwrite("E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Images/user1/frame%d.jpg" % count_i, frame)     # save frame as JPEG file      
+                        cv2.imwrite("C:/Users/Dhanush.Komari/Downloads/FR_Backup/Images/user1/frame%d.jpg" % count_i, frame)     # save frame as JPEG file      
                         success,frame = cap.read()
                         print('Read a new frame: ', success)
                         count_i += 1 
                         if count_i>=10:
-                            dataset = "E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Images/user1"# path of the data set
-                            module = "E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Images/encoding1.pickle" # were u want to store the pickle file
+                            dataset = "C:/Users/Dhanush.Komari/Downloads/FR_Backup/Images/"# path of the data set
+                            module = "C:/Users/Dhanush.Komari/Downloads/FR_Backup/Images/encoding1.pickle" # were u want to store the pickle file
                             imagepaths = list(paths.list_images(dataset))
                             print(imagepaths)
                             knownEncodings = []
@@ -188,11 +197,10 @@ def main():
                                     output = open(module, "wb")
                                     pickle.dump(data, output)
                                     output.close()
-                            module = "E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/encoding_append.pickle" # were u want to store the pickle file
-                            output = open(module, "wb")
+                            module = "C:/Users/Dhanush.Komari/Downloads/FR_Backup/Images/encoding_append.pickle" # were u want to store the pickle file
                             module = pickle.loads(open(module, "rb").read())
                             
-                            module1 = "E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Images/encoding1.pickle" # were u want to store the pickle file
+                            module1 = "C:/Users/Dhanush.Komari/Downloads/FR_Backup/Images/encoding1.pickle" # were u want to store the pickle file
                             module1 = pickle.loads(open(module1, "rb").read())
                             
                             
@@ -206,7 +214,7 @@ def main():
                             print(len(module1["encodings"]),len(module["encodings"]))
                             
                             
-                            module = "E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Images/encoding_append.pickle" # were u want to store the pickle file
+                            module = "C:/Users/Dhanush.Komari/Downloads/FR_Backup/Images/encoding_append.pickle" # were u want to store the pickle file
                             
                             
                             data = {"encodings": y, "names": x}
@@ -220,7 +228,9 @@ def main():
                                     
                     
                     #os.mkdir(path, mode) 
-                    cv2.imwrite("E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Images/user1" % count, frame)
+                    
+                    #os.mkdir(path, mode) 
+                    cv2.imwrite("C:/Users/Dhanush.Komari/Downloads/FR_Backup/Images/user1/frame%d.jpg" % count, frame)
                     
                     
 
@@ -294,6 +304,7 @@ def main():
                             c_time = str(currenttime1)
                             df.to_csv("E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Id.csv")
                             pushing=df.iloc[-1,0]
+                            print('Im having problem')
                             cursor = conn.cursor()
                             
                             stat = 'known'
