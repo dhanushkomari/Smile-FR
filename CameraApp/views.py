@@ -54,7 +54,7 @@ def Index(request):
         dif = (now-time3).seconds
         print(dif)
 
-        if dif<=30:
+        if dif<=60:
             print('new Unknown Person Identified')
             stat = 'new'
         else:

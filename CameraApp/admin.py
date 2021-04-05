@@ -12,7 +12,7 @@ class StatusAdmin(admin.ModelAdmin):
 admin.site.register(Status, StatusAdmin)
 
 class PatientAdminn(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'last_name', 'blood_group', 'gender', 'contact', 'email', 'city', 'created_at']
+    list_display = ['patient_id', 'first_name', 'last_name', 'blood_group', 'gender', 'contact', 'email', 'city', 'created_at']
 
 admin.site.register(Patient, PatientAdminn)
 

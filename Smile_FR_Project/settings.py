@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'crispy_forms',
     'rest_framework',
+    
     'CameraApp',
+    'BookingApp',
 
 ]
 
@@ -60,7 +63,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'CameraApp', 'templates')
+            os.path.join(BASE_DIR, 'CameraApp', 'templates'),
+            os.path.join(BASE_DIR, 'BookingApp', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -87,7 +91,7 @@ DATABASES = {
     # }
     'default' : {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-        'NAME' : 'FR-SMILE-DB',
+        'NAME' : 'SMILE-FR-DB',
         'USER' : 'postgres',
         'PASSWORD' : 'admin123',
         'HOST' : 'localhost',

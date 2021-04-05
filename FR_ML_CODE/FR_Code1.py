@@ -27,7 +27,7 @@ import warnings
 import psycopg2
 import requests
 import re
-conn = psycopg2.connect(host = 'localhost',database = 'FR-SMILE-DB',user = 'postgres',password = 'admin123',port = 5432)
+conn = psycopg2.connect(host = 'localhost',database = 'SMILE-FR-DB',user = 'postgres',password = 'admin123',port = 5432)
 
     
 warnings.filterwarnings("ignore")
@@ -280,6 +280,16 @@ def main():
                         df=df.append(df1, ignore_index = True) 
                                     
                         df.to_csv("E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Id.csv")
+                        cursor = conn.cursor()
+                        
+                        stat = 'known'
+                        d = datetime.datetime.now()
+                        cursor.execute("ROLLBACK")
+                        query = '''INSERT INTO "CameraApp_status"(status, created_at) VALUES (%s, %s)'''
+                        cursor.execute((query), (stat,d))
+                        
+                        
+                        print('DB updated with known')
 
                         
                 else:

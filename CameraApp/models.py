@@ -38,7 +38,7 @@ stat = (
 )
 
 class Patient(models.Model):    
-    # id = models.IntegerField(primary_key = True, unique = True, editable = False)
+    patient_id = models.AutoField(primary_key = True)
     first_name = models.CharField(max_length = 30, blank = False)
     last_name = models.CharField(max_length = 30, blank = False)
     age = models.IntegerField()
@@ -56,7 +56,7 @@ class Patient(models.Model):
     class Meta:
         verbose_name = 'Patient'
         verbose_name_plural = 'Patients'
-        ordering = ('-id',)
+        ordering = ('-patient_id',)
 
     # def get_url():
         # return reverse('')
