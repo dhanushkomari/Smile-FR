@@ -11,6 +11,7 @@ from .forms import PatientForm
 from rest_framework.decorators import api_view
 from .serializers import PatientSerializer, StatusSerializer
 from rest_framework.response import Response
+from BookingApp.models import Booking
 import pytz
 
 tz = pytz.timezone('Asia/Kolkata')
@@ -78,6 +79,10 @@ def Index(request):
         if diff<=25:
             print('person detected recently')
             person = 'recent'
+
+            
+
+
         else:
             print('person detected long time ago')
             person = 'ago'

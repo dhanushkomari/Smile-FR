@@ -41,7 +41,7 @@ class Doctor(models.Model):
         ordering = ('-id',)
 
     def __str__(self):
-        return '{}'.format(self.first_name + self.last_name)
+        return '{}'.format(self.first_name +' '+self.last_name)
 
     def get_url(self):
         pass
@@ -62,8 +62,8 @@ time =(
         
 )
 class Booking(models.Model):    
-    patient = models.ForeignKey('CameraApp.Patient', on_delete=models.CASCADE)
-    doctor = models.ForeignKey('Doctor', on_delete = models.CASCADE)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add = True)
     description = models.TextField()
     Booking_time = models.CharField(default = '10:00 to 10:30', choices = time, max_length = 15)
