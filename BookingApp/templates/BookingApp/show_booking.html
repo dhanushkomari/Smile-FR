@@ -74,60 +74,44 @@
                                <!-- icon -->
                                <img src="{% static "assets/images/icons/layer.svg" %}" class="icon img-fluid mb-1" alt="icon"> 
                                                               
-                                   {% ifequal status 'known' %}
+                                  <p style="color: yellow;">Patient Booking Details</p>
                                    <div class="se_title">
-                                      {% ifequal person 'recent' %}
-                                            {% if name %} <h3 class="mb-1">Hi, {{name}}</h3></a>{% endif %} 
-                                            {% if date %} <p class="mb-1">You have been identified @ {{date}}<br></p>{% endif %}
-
-                                            {% ifequal booking 'yes' %}
-                                                {% if boo %} 
-                                                <p class="mb-1" style="color: aliceblue;">You have an appointment between @ <b style="color: orange;">{{boo}}</b> with <b style="color: orange;">{% if doc %}Dr.{{doc}}{% endif %}</b></p> {% endif %}
-                                                <a href="{% url 'BookingApp:single-booking' b.id %}" class="btn btn-md btn-warning">View your appointment</a>    
-                                            {% endifequal %}
-
-                                            {% ifequal booking 'no' %}
-                                                <p class="mb-1" style="color: aliceblue;">You Don't have any Appointments, Please Visit Reception to book an appointment with us</p>  
+                                        <table class="table table-striped table-dark">
+                                            <thead>
                                                 
-                                            {% endifequal %}
-
-
-                                            </div>
-                                        {% else %}
-                                            <div class="se_title">
-                                                <h2 class="mb-1" style="color: aliceblue;">Welcome to Smiles</h2>
-                                                {% include 'CameraApp/greetings.html' %}
-                                            </div>
-                                            
-                                        {% endifequal %}
-
-
-                                   {% endifequal %}
-                                    
-                                   {% ifequal status 'unknown' %}
-                                    
-                                    {% ifequal stat 'new' %}
-
-                                        <div class="se_title">
-                                                    <h2 class="mb-1" style="color: aliceblue;">Welcome to Smiles</h2> 
-                                                    <p class="mb-1" style="color: aliceblue;"> You Are not in our User List</h3><br><br>
-                                                    <!-- <p class="mb-1">Click below, get your own access</p> -->
-                                                    <a href="{% url 'CameraApp:create' %}" id = "btn_click" class="btn btn-md btn-warning">Create your own Account</a>
-                                            </div>
-                                    {% else %}
-                                        <div class="se_title">
-                                            <h2 class="mb-1" style="color: aliceblue;">Welcome to Smiles</h2> 
-                                            {% include 'CameraApp/greetings.html' %}
-                                            
-                                        </div>
-                                            
-                                    
-                                    {% endifequal %}
-
-                                   {% endifequal %} 
+                                                
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Patient</th>
+                                                    <td>{%if a %}{{a.patient.first_name}}&nbsp;{{a.patient.last_name}}{% endif %}</td>                                                    
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Patient Age</th>
+                                                    <td>{%if a %}{{a.patient.age}}{% endif %}</td>                                                    
+                                                </tr> 
+                                                <tr>
+                                                    <th scope="row">Patient Bllod Group</th>
+                                                    <td>{%if a %}{{a.patient.blood_group}}{% endif %}</td>                                                    
+                                                </tr> 
+                                                <tr>
+                                                    <th scope="row">Consultant Doctor</th>
+                                                    <td>{%if a %}{{a.doctor.first_name}}&nbsp;{{a.doctor.last_name}}{% endif %}</td>                                                    
+                                                </tr>  
+                                                <tr>
+                                                    <th scope="row">Appointment Time</th>
+                                                    <td>{%if a %}{{a.Booking_time}}{% endif %}</td>                                                    
+                                                </tr>  
+                                                <!-- <tr>
+                                                    <th scope="row">Created At</th>
+                                                    <td>{% if a %}{{a.created_at}}{% endif %}</td>                                                    
+                                                </tr>                                                 -->
+                                            </tbody>
+                                        </table>  
+                                        <a href="{% url 'CameraApp:index' %}" class="btn btn-md btn-info">Go to Home</a>  
                                    
                                    
-                           </div>
+                                   </div>
                        </div>
                    </div>
                </div>
@@ -137,7 +121,7 @@
 
            </div>
        </div>
-       
+
 
    <!-- Scripts -->
    
@@ -157,8 +141,8 @@
             function ()
             {               
                 console.log('loaded');                     
-                $('#cont').load(location.href + " #cont").fadeIn("slow");
-            }, 5000); 
+                window.location.href = 'http://127.0.0.1:8000'
+            }, 250000); 
     
         
    </script> 

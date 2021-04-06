@@ -5,7 +5,9 @@ from CameraApp.models import Patient
 
 
 # Create your views here.
-
+###############################################################################################
+################################     CREATING A BOOKING             ###########################
+###############################################################################################
 def BookingView(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
@@ -23,15 +25,11 @@ def BookingView(request):
         form = BookingForm()
     return render(request, 'BookingApp/booking.html', {'form':form})
 
+###############################################################################################
+################################       SHOW A BOOKING             #############################
+###############################################################################################
 
-def test(request):
-    name = 'Dhanu'
-    p = Booking.objects.filter(patient__first_name__contains = name).latest('pk')
-    print(p)
-    print(p.patient.first_name)
-    print(p.patient.last_name)
-    print(p.created_at)
-    print(p.Booking_time)
-
-            
-    return render(request, 'BookingApp/test.html')
+def ShowBookingView(request, pk):
+    a = Booking.objects.get(id = pk)
+    print(a)
+    return render(request, 'BookingApp/show_booking.html',{'a':a})

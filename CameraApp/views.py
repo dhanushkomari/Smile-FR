@@ -42,6 +42,7 @@ def Index(request):
     booking = 'init'
     boo = ''
     doc = ''
+    b = ''
     ##########################   Fetching recent person is known or unknown  #####################
     s_obj = Status.objects.latest('pk')
     status = s_obj.status
@@ -99,7 +100,7 @@ def Index(request):
             print('person detected long time ago')
             person = 'ago'
 
-        return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status, 'person': person, 'booking':booking, 'boo':boo, 'doc':doc})  
+        return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status, 'person': person, 'booking':booking, 'boo':boo, 'doc':doc, 'b':b})  
     else:
         return HttpResponse('Page Not Found') 
     return render(request,'CameraApp/index.html', {'status':status, 'stat':stat})
