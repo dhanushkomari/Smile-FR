@@ -78,9 +78,20 @@
                                    <div class="se_title">
                                       {% ifequal person 'recent' %}
                                             {% if name %} <h3 class="mb-1">Hi, {{name}}</h3></a>{% endif %} 
-                                            {% if date %} <p class="mb-1">You have been identified @ {{date}}<br>
-                                            Here Are your Bookings. </p>
-                                            <a href="#" id = "btn_click" class="btn btn-md btn-warning">With Dr.Nathan @2:30 PM </a> {% endif %}
+                                            {% if date %} <p class="mb-1">You have been identified @ {{date}}<br></p>{% endif %}
+
+                                            {% ifequal booking 'yes' %}
+                                                {% if boo %} 
+                                                <p class="mb-1" style="color: aliceblue;">You have an appointment between @ <b style="color: orange;">{{boo}}</b> with <b style="color: orange;">{% if doc %}{{doc}}{% endif %}</b></p> {% endif %}
+                                                <a href="{% url 'BookingApp:test' %}" class="btn btn-md btn-warning">View your appointment</a>    
+                                            {% endifequal %}
+
+                                            {% ifequal booking 'no' %}
+                                                <p class="mb-1" style="color: aliceblue;">You Don't have any Appointments, Please Visit Reception to book an appointment with us</p>  
+                                                
+                                            {% endifequal %}
+
+
                                             </div>
                                         {% else %}
                                             <div class="se_title">

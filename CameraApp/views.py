@@ -39,6 +39,9 @@ def Index(request):
     name = '' 
     person = ''
     stat = ''
+    booking = 'init'
+    boo = ''
+    doc = ''
     ##########################   Fetching recent person is known or unknown  #####################
     s_obj = Status.objects.latest('pk')
     status = s_obj.status
@@ -62,7 +65,7 @@ def Index(request):
             print('unknown person identified long time ago')
             stat = 'old'
 
-    ################################    FRO KNOWN PERSONS     #####################################
+    ################################    FROM KNOWN PERSONS     #####################################
     elif status.lower() == 'known':        
         data = pd.read_csv('E:/WEB_PROJECTS/Smile_FR_Project/FR_ML_CODE/Id.csv')   
         # print(data) 
@@ -79,15 +82,24 @@ def Index(request):
         if diff<=25:
             print('person detected recently')
             person = 'recent'
-
-            
-
-
+            try:
+                name1 = name[0:5]
+                print('Came into try and time is less than 25')
+                b = Booking.objects.filter(patient__first_name__icontains = name1).latest('pk')
+                print(b)
+                booking = 'yes'
+                boo = b.Booking_time
+                doc = b.doctor.first_name+' '+b.doctor.last_name
+                print(doc)                
+                print(boo)
+            except:
+                booking = 'no'
+                pass
         else:
             print('person detected long time ago')
             person = 'ago'
 
-        return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status, 'person': person})  
+        return render(request,'CameraApp/index.html', {'name':name, 'date':date, 'status':status, 'person': person, 'booking':booking, 'boo':boo, 'doc':doc})  
     else:
         return HttpResponse('Page Not Found') 
     return render(request,'CameraApp/index.html', {'status':status, 'stat':stat})

@@ -25,21 +25,13 @@ def BookingView(request):
 
 
 def test(request):
-    op = 'q'
-    time = ''
-    name = 'Dhanus'
-    b = Booking.objects.all()
-    for i in range(len(b)):
-        obj = b[i].patient.first_name
-        if obj == name:
-            print(b, 'is Existed')
-            op = 'yes'
-            time = b[i].Booking_time
-            print(time)
-            break
+    name = 'Dhanu'
+    p = Booking.objects.filter(patient__first_name__contains = name).latest('pk')
+    print(p)
+    print(p.patient.first_name)
+    print(p.patient.last_name)
+    print(p.created_at)
+    print(p.Booking_time)
 
-    if op ==  'q':
-        print('Not exist with name')
-    
             
     return render(request, 'BookingApp/test.html')

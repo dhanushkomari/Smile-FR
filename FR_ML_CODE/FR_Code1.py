@@ -135,7 +135,7 @@ def main():
                                 x=response.json()
                                 d = x['created_at']
                                 q = recent_time(d)
-                                id=x['first_name']+str(x['id'])
+                                id=x['first_name']+str(x['patient_id'])
                                 if q<=80:
                                     count =1
                                     try:
@@ -358,6 +358,6 @@ def main():
     
 if __name__ == "__main__":
     main()
-  
+    
 
     
