@@ -13,7 +13,7 @@
    <!-- <meta http-equiv="refresh" content="5"> -->
 
    <!-- stylesheet -->
-   <link rel="stylesheet" href="{% static "assets/css/vendors/bootstrap.min.css" %}">
+   <link     rel="stylesheet" href="{% static "assets/css/vendors/bootstrap.min.css" %}">
    <link rel="stylesheet" href="{% static "assets/css/vendors/font-awesome.min.css" %}">
    <link rel="stylesheet" href="{% static "assets/css/vendors/slick.min.css" %}">
    <link rel="stylesheet" href="{% static "assets/css/theme/style.css" %}">
@@ -102,14 +102,11 @@
                                                     <th scope="row">Appointment Time</th>
                                                     <td>{%if a %}{{a.Booking_time}}{% endif %}</td>                                                    
                                                 </tr>  
-                                                <!-- <tr>
-                                                    <th scope="row">Created At</th>
-                                                    <td>{% if a %}{{a.created_at}}{% endif %}</td>                                                    
-                                                </tr>                                                 -->
+                                                
                                             </tbody>
+                                            
                                         </table>  
                                         <a href="{% url 'CameraApp:index' %}" class="btn btn-md btn-info">Go to Home</a>  
-                                   
                                    
                                    </div>
                        </div>
@@ -142,7 +139,7 @@
             {               
                 console.log('loaded');                     
                 window.location.href = 'http://127.0.0.1:8000'
-            }, 250000); 
+            }, 30000); 
     
         
    </script> 

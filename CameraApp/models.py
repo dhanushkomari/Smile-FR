@@ -51,8 +51,6 @@ class Patient(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     # photo = models.ImageField(upload_to='Patient_Users',blank = True, null = True)
         
-    # patient_bookings = models.name = models.ForeignKey('Booking',on_delete=models.CASCADE)
-
     class Meta:
         verbose_name = 'Patient'
         verbose_name_plural = 'Patients'
